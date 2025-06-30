@@ -1,0 +1,203 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4539507350157833091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6618414504361038676}
+  - component: {fileID: 8127411136076952226}
+  m_Layer: 5
+  m_Name: GameBottomPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6618414504361038676
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4539507350157833091}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1737941153518048263}
+  - {fileID: 8302702990185927863}
+  - {fileID: 7133966364742239845}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0.15}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8127411136076952226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4539507350157833091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0796cbc811771b5408508fe8623f30c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _direction: 0
+  _openTime: 0
+  _closeTime: 0
+  _lockImage: {fileID: 0}
+--- !u!1001 &366277377068443452
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6618414504361038676}
+    m_Modifications:
+    - target: {fileID: 2149602054267946116, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+      propertyPath: m_fontSize
+      value: 34.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3929273732717495855, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+      propertyPath: m_Name
+      value: ProgressPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7674407979567830052, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7674407979567830052, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515294469308167051, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515294469308167051, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515294469308167051, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515294469308167051, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515294469308167051, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+--- !u!224 &8302702990185927863 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8515294469308167051, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+  m_PrefabInstance: {fileID: 366277377068443452}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2414975152820904467
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6618414504361038676}
+    m_Modifications:
+    - target: {fileID: 4792753076807345270, guid: ad293336c1e81874eba7b4a116400209, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792753076807345270, guid: ad293336c1e81874eba7b4a116400209, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792753076807345270, guid: ad293336c1e81874eba7b4a116400209, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792753076807345270, guid: ad293336c1e81874eba7b4a116400209, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792753076807345270, guid: ad293336c1e81874eba7b4a116400209, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413360032805345488, guid: ad293336c1e81874eba7b4a116400209, type: 3}
+      propertyPath: m_fontSize
+      value: 34.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422529236201259641, guid: ad293336c1e81874eba7b4a116400209, type: 3}
+      propertyPath: m_Name
+      value: ControlPanel
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad293336c1e81874eba7b4a116400209, type: 3}
+--- !u!224 &7133966364742239845 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4792753076807345270, guid: ad293336c1e81874eba7b4a116400209, type: 3}
+  m_PrefabInstance: {fileID: 2414975152820904467}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3364955422058880356
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6618414504361038676}
+    m_Modifications:
+    - target: {fileID: 2378041871783643435, guid: eb57801fa4121674d80ca7a2c17e3eac, type: 3}
+      propertyPath: m_Name
+      value: HealthPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837784527257844556, guid: eb57801fa4121674d80ca7a2c17e3eac, type: 3}
+      propertyPath: m_fontSize
+      value: 34.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939754008702470499, guid: eb57801fa4121674d80ca7a2c17e3eac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939754008702470499, guid: eb57801fa4121674d80ca7a2c17e3eac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939754008702470499, guid: eb57801fa4121674d80ca7a2c17e3eac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939754008702470499, guid: eb57801fa4121674d80ca7a2c17e3eac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939754008702470499, guid: eb57801fa4121674d80ca7a2c17e3eac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb57801fa4121674d80ca7a2c17e3eac, type: 3}
+--- !u!224 &1737941153518048263 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3939754008702470499, guid: eb57801fa4121674d80ca7a2c17e3eac, type: 3}
+  m_PrefabInstance: {fileID: 3364955422058880356}
+  m_PrefabAsset: {fileID: 0}
