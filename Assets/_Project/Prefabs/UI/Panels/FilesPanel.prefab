@@ -179,7 +179,9 @@ MonoBehaviour:
   _direction: 0
   _openTime: 0
   _closeTime: 0
-  _lockImage: {fileID: 0}
+  _fileSlotPrefab: {fileID: 1643039598263725548, guid: 91d01ebd8d6696f41a8bbfce4dae200e, type: 3}
+  _fileSlotsContainer: {fileID: 8947395578830681886}
+  _compressButton: {fileID: 5596808165733247413}
 --- !u!1 &3950156554224554997
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,3 +706,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3034369754309488025, guid: d5b571e7e0ed7ed4a818c750d3748c3e, type: 3}
   m_PrefabInstance: {fileID: 1785805556267902713}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5596808165733247413 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6152954955772546892, guid: d5b571e7e0ed7ed4a818c750d3748c3e, type: 3}
+  m_PrefabInstance: {fileID: 1785805556267902713}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8654b3d8c5e3dbf4ba9cc6b4497d61f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

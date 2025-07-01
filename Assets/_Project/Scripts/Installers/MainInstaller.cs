@@ -9,10 +9,12 @@ public class MainInstaller : MonoInstaller
     {
         InterfaceController interfaceContr = new(_screens);
         GameplayController gameplay = new(interfaceContr);
-        ArchiveController archive = new();
-        GameController game = new();
+        ArchiveController archive = new(interfaceContr);
+        GameController game = new(interfaceContr);
 
         interfaceContr.Init();
+        archive.Init();
         gameplay.Init();
+        game.Init();
     }
 }

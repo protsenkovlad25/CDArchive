@@ -6,6 +6,7 @@ public class ArchiveScreen : Screen
     public event UnityAction OnMenuClicked;
     public event UnityAction OnWriteClicked;
     public event UnityAction OnCompressClicked;
+    public event UnityAction<FileSlot> OnFileClicked;
 
     [Header("UI Elements")]
     [SerializeField] private TopPanel _topPanel;
@@ -17,7 +18,22 @@ public class ArchiveScreen : Screen
         base.Init();
 
         _discPanel.OnWriteClicked += () => OnWriteClicked?.Invoke();
+        _filesPanel.OnFileCliked += (file) => OnFileClicked?.Invoke(file);
         _filesPanel.OnCompressClicked += () => OnCompressClicked?.Invoke();
+
+        _topPanel.Init();
+        _discPanel.Init();
+        _filesPanel.Init();
+    }
+
+    public void LoadFiles()
+    {
+        _filesPanel.LoadFiles();
+    }
+
+    public void ChangeCompressInteract(bool state)
+    {
+        _filesPanel.ChangeCompressInteract(state);
     }
 
     public void ClickMenu()
