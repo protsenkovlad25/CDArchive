@@ -19,3 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e38533d382fb5984f80208a7163ffb14, type: 2}
   - {fileID: 11400000, guid: 0530cef6541a1c047935a19d0b0da387, type: 2}
   - {fileID: 11400000, guid: b0125381888c56c4da8f05bd531ebbb3, type: 2}
+  _levelSettings:
+  - {fileID: 11400000, guid: 0e375d0eadad8fc45b71a47715eb9abb, type: 2}
+  - {fileID: 11400000, guid: df06131ae697f21459c40a770435d937, type: 2}
+  - {fileID: 11400000, guid: 64409f02eab72f340b36ec676575b871, type: 2}

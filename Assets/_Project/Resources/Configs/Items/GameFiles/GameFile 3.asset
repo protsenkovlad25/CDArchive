@@ -16,4 +16,4 @@ MonoBehaviour:
     _id: gameFile_3
     _name: File 3
     _size: 100
-    _compression: 0
+    _compression: 1

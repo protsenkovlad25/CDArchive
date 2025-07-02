@@ -94,8 +94,8 @@ namespace VP
         }
         public void ReturnAll()
         {
-            foreach (var obj in objects)
-                Return(obj.Key);
+            for (int i = 0; i < objects.Count; i++)
+                Return(objects.ElementAt(i).Key);
         }
 
         public void ClearPool()

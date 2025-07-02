@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1902b10758ea460448533e77fb9b939b, type: 3}
-  m_Name: GameFile 5
+  m_Script: {fileID: 11500000, guid: acd077ba3df458c4eb32d02fa86d00b9, type: 3}
+  m_Name: Level 3
   m_EditorClassIdentifier: 
-  _gameFileData:
-    _id: gameFile_5
-    _name: File 5
-    _size: 100
-    _compression: 1
+  _gridData:
+    _internalSize: {x: 70, y: 30}
+    _externalLBPoint: {x: 3, y: 3}
+    _externalRTPoint: {x: 66, y: 26}
+  _playerStartPos: {x: 35, y: 29}
+  _completePercent: 0.4
+  _shootInterval: 1

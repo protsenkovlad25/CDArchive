@@ -3,24 +3,38 @@ using UnityEngine;
 public class GameplayController
 {
     private readonly InterfaceController interfaceController;
+    private readonly GameView gameView;
 
-    public GameplayController(InterfaceController interfaceController)
+    private readonly GameScreen gameScreen;
+    private readonly PauseScreen pauseScreen;
+    private readonly GridSpace gridSpace;
+
+    public GameplayController(InterfaceController interfaceController, GameView gameView)
     {
         this.interfaceController = interfaceController;
+        this.gameView = gameView;
+
+        gridSpace = gameView.GameSpace;
+        gameScreen = interfaceController.Screens.GameScreen;
+        pauseScreen = interfaceController.Screens.PauseScreen;
     }
 
     public void Init()
     {
-        interfaceController.Screens.GameScreen.OnPauseClicked += PauseGame;
-        interfaceController.Screens.PauseScreen.OnAbortClicked += AbortGame;
-        interfaceController.Screens.PauseScreen.OnContinueClicked += ContinueGame;
+        gameScreen.OnOpened += StartGame;
+        gameScreen.OnPauseClicked += PauseGame;
+        pauseScreen.OnAbortClicked += AbortGame;
+        pauseScreen.OnContinueClicked += ContinueGame;
+
+        gridSpace.Init();
+        gridSpace.DrawSpace();
+        gameView.ChangeActiveState(false);
     }
 
     private void StartGame()
     {
         ChangeTimeScale(1f);
-
-        // start code
+        gameView.ChangeActiveState(true);
     }
     private void PauseGame()
     {
@@ -43,6 +57,7 @@ public class GameplayController
     {
         StopGame();
         ChangeTimeScale(1f);
+        gameView.ChangeActiveState(false);
     }
 
     private void ChangeTimeScale(float scale)

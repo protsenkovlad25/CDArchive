@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74c22464caae474e820e868db2c8531, type: 3}
   m_Name: CompressionSettingConfig
   m_EditorClassIdentifier: 
+  _levelsCount: 3
   _compressionDatas:
     _serializedList:
     - Key: 0
       Value:
-        _compressionModifier: 0
+        _modifier: 0
     - Key: 1
       Value:
-        _compressionModifier: 0.25
+        _modifier: 0.75
     - Key: 2
       Value:
-        _compressionModifier: 0.5
+        _modifier: 0.5
     - Key: 3
       Value:
-        _compressionModifier: 0.75
+        _modifier: 0.25

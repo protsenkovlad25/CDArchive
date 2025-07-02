@@ -4,21 +4,22 @@ public class ArchiveController
 {
     private readonly InterfaceController interfaceController;
 
-    private ArchiveScreen _archiveScreen;
+    private readonly ArchiveScreen archiveScreen;
     private FileSlot _selectedFile;
 
     public ArchiveController(InterfaceController interfaceController)
     {
         this.interfaceController = interfaceController;
+
+        archiveScreen = interfaceController.Screens.ArchiveScreen;
     }
 
     public void Init()
     {
-        _archiveScreen = interfaceController.Screens.ArchiveScreen;
-        _archiveScreen.OnOpened += OpenArchive;
-        _archiveScreen.OnFileClicked += FileCliked;
-        _archiveScreen.OnCompressClicked += DeselectFile;
-        _archiveScreen.LoadFiles();
+        archiveScreen.OnOpened += OpenArchive;
+        archiveScreen.OnFileClicked += FileCliked;
+        archiveScreen.OnCompressClicked += DeselectFile;
+        archiveScreen.LoadFiles();
         
         _selectedFile = null;
     }
@@ -45,13 +46,13 @@ public class ArchiveController
         file.ChangeSelectedState(true);
         _selectedFile = file;
 
-        _archiveScreen.ChangeCompressInteract(true);
+        archiveScreen.ChangeCompressInteract(true);
     }
     private void DeselectFile()
     {
         _selectedFile?.ChangeSelectedState(false);
         _selectedFile = null;
 
-        _archiveScreen.ChangeCompressInteract(false);
+        archiveScreen.ChangeCompressInteract(false);
     }
 }
