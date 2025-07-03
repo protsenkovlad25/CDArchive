@@ -3,24 +3,25 @@ using Zenject;
 
 public class ArchiveController : IInitializable
 {
-    private readonly InterfaceController interfaceController;
+    private readonly InterfaceController interfaceCntr;
+    private readonly PlayerController playerCntr;
 
     private readonly ArchiveScreen archiveScreen;
     private FileSlot _selectedFile;
 
-    public ArchiveController(InterfaceController interfaceController)
+    public ArchiveController(InterfaceController interfaceCntr, PlayerController playerCntr)
     {
-        this.interfaceController = interfaceController;
+        this.interfaceCntr = interfaceCntr;
+        this.playerCntr = playerCntr;
 
-        archiveScreen = interfaceController.Screens.ArchiveScreen;
+        archiveScreen = interfaceCntr.Screens.ArchiveScreen;
     }
 
     public void Initialize()
     {
         archiveScreen.OnOpened += OpenArchive;
         archiveScreen.OnFileClicked += FileCliked;
-        //archiveScreen.OnCompressClicked += DeselectFile;
-        archiveScreen.LoadFiles();
+        archiveScreen.LoadFiles(playerCntr.PlayerData.GameFiles);
 
         _selectedFile = null;
     }
@@ -28,6 +29,13 @@ public class ArchiveController : IInitializable
     private void OpenArchive()
     {
 
+    }
+
+    public void UpdateSelectedFileCompression(int compressionLvl)
+    {
+        _selectedFile.File.UpdateCompressionLevel(compressionLvl);
+        _selectedFile.UpdateData();
+        playerCntr.SaveData();
     }
 
     private void FileCliked(FileSlot file)

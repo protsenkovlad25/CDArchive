@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -26,9 +27,9 @@ public class ArchiveScreen : Screen
         _filesPanel.Init();
     }
 
-    public void LoadFiles()
+    public void LoadFiles(List<GameFileData> files)
     {
-        _filesPanel.LoadFiles();
+        _filesPanel.LoadFiles(files);
     }
 
     public void ChangeCompressInteract(bool state)

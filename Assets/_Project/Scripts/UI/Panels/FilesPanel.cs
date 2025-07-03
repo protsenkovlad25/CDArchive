@@ -23,17 +23,14 @@ public class FilesPanel : Panel
         ChangeCompressInteract(false);
     }
 
-    public void LoadFiles()
+    public void LoadFiles(List<GameFileData> files)
     {
-        List<GameFileConfig> files = new();
-        files.AddRange(Configs.GlobalSettings.GameFileSettings);
-
         _slots = new();
         FileSlot newSlot;
-        foreach (var fileSettings in files)
+        foreach (var file in files)
         {
             newSlot = InstantiateSlot();
-            newSlot.SetFile(new GameFileData(fileSettings.GameFileData));
+            newSlot.SetFile(file);
 
             _slots.Add(newSlot);
         }

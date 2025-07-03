@@ -62,12 +62,17 @@ public class FileSlot : MonoBehaviour
     {
         _file = file;
 
-        SetName(file.Name);
-        ActivateIndicators(file.CompressionLevel);
+        UpdateData();
     }
     private void SetName(string name)
     {
         _nameText.text = name;
+    }
+
+    public void UpdateData()
+    {
+        SetName(_file.Name);
+        ActivateIndicators(_file.CompressionLevel);
     }
 
     public void ChangeSelectedState(bool state)

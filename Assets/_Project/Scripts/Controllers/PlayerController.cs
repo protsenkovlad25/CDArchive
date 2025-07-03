@@ -5,15 +5,20 @@ using Zenject;
 public class PlayerController : IInitializable, IFixedTickable
 {
     private readonly Unit player;
+    private readonly SaveController saveCntr;
     private readonly InputController inputCntr;
     private readonly GridSpaceController gridSpaceCntr;
 
+    private PlayerData _playerData;
     private List<Cell> _filledCells;
     private bool _isFilling;
 
-    public PlayerController(Unit player, InputController inputCntr, GridSpaceController gridSpaceCntr)
+    public PlayerData PlayerData => _playerData;
+
+    public PlayerController(Unit player, SaveController saveCntr, InputController inputCntr, GridSpaceController gridSpaceCntr)
     {
         this.player = player;
+        this.saveCntr = saveCntr;
         this.inputCntr = inputCntr;
         this.gridSpaceCntr = gridSpaceCntr;
     }
@@ -24,10 +29,32 @@ public class PlayerController : IInitializable, IFixedTickable
 
         _filledCells = new();
 
+        _playerData = saveCntr.LoadPlayerData();
+        CheckLoadedFiles();
+
         player.OnTriggerEnter += TriggerEnter;
         player.OnTriggerExit += TriggerExit;
         player.Init();
         player.StopMove();
+    }
+
+    private void CheckLoadedFiles()
+    {
+        List<GameFileConfig> configFiles = Configs.GlobalSettings.GameFileSettings;
+        if (_playerData.GameFiles.Count < configFiles.Count)
+        {
+            int startIndex = _playerData.GameFiles.Count;
+            int count = configFiles.Count;
+            for (int i = startIndex; i < count; i++)
+            {
+                _playerData.GameFiles.Add(new GameFileData(configFiles[i].GameFileData));
+            }
+        }
+        saveCntr.SavePlayerData(_playerData);
+    }
+    public void SaveData()
+    {
+        saveCntr.SavePlayerData(_playerData);
     }
 
     public void FixedTick()

@@ -9,21 +9,23 @@ public class MainInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        InputController input = new();
-        GridSpaceController gridSpace = new(_gameView.GameSpace);
-        PlayerController player = new(_gameView.Player, input, gridSpace);
+        SaveController saveCntr = new();
         InterfaceController interfaceCntr = new(_screens);
-        GameplayController gameplay = new(interfaceCntr, gridSpace, player, _gameView);
-        ArchiveController archive = new(interfaceCntr);
-        GameController game = new(interfaceCntr);
+        InputController inputCntr = new();
+        GridSpaceController gridSpaceCntr = new(_gameView.GameSpace);
+        PlayerController playerCntr = new(_gameView.Player, saveCntr, inputCntr, gridSpaceCntr);
+        ArchiveController archiveCntr = new(interfaceCntr, playerCntr);
+        GameplayController gameplayCntr = new(interfaceCntr, gridSpaceCntr, archiveCntr, playerCntr, _gameView);
+        GameController gameCntr = new(interfaceCntr);
 
-        Container.BindInterfacesAndSelfTo<InputController>().FromInstance(input).AsSingle();
-        Container.BindInterfacesAndSelfTo<PlayerController>().FromInstance(player).AsSingle();
-        Container.BindInterfacesAndSelfTo<GridSpaceController>().FromInstance(gridSpace).AsSingle();
+        Container.BindInterfacesAndSelfTo<SaveController>().FromInstance(saveCntr).AsSingle();
+        Container.BindInterfacesAndSelfTo<InputController>().FromInstance(inputCntr).AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerController>().FromInstance(playerCntr).AsSingle();
+        Container.BindInterfacesAndSelfTo<GridSpaceController>().FromInstance(gridSpaceCntr).AsSingle();
         Container.BindInterfacesAndSelfTo<InterfaceController>().FromInstance(interfaceCntr).AsSingle();
-        Container.BindInterfacesAndSelfTo<GameplayController>().FromInstance(gameplay).AsSingle();
-        Container.BindInterfacesAndSelfTo<ArchiveController>().FromInstance(archive).AsSingle();
-        Container.BindInterfacesAndSelfTo<GameController>().FromInstance(game).AsSingle();
+        Container.BindInterfacesAndSelfTo<GameplayController>().FromInstance(gameplayCntr).AsSingle();
+        Container.BindInterfacesAndSelfTo<ArchiveController>().FromInstance(archiveCntr).AsSingle();
+        Container.BindInterfacesAndSelfTo<GameController>().FromInstance(gameCntr).AsSingle();
 
         Container.Bind<ScreensView>().FromInstance(_screens).AsSingle();
         Container.Bind<GameView>().FromInstance(_gameView).AsSingle();

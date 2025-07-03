@@ -5,6 +5,7 @@ public class GameplayController : IInitializable
 {
     private readonly InterfaceController interfaceCntr;
     private readonly GridSpaceController gridSpaceCntr;
+    private readonly ArchiveController archiveCntr;
     private readonly PlayerController playerCntr;
     private readonly GameView gameView;
 
@@ -12,14 +13,16 @@ public class GameplayController : IInitializable
     private readonly PauseScreen pauseScreen;
 
     private int _currentLevel;
+    private int _completedLevels;
     private GlobalSettingsConfig _globalConfig;
     private LevelSettingsConfig _currentLevelConfig;
 
     public GameplayController(InterfaceController interfaceCntr, GridSpaceController gridSpaceCntr,
-        PlayerController playerCntr, GameView gameView)
+        ArchiveController archiveCntr, PlayerController playerCntr, GameView gameView)
     {
         this.interfaceCntr = interfaceCntr;
         this.gridSpaceCntr = gridSpaceCntr;
+        this.archiveCntr = archiveCntr;
         this.playerCntr = playerCntr;
         this.gameView = gameView;
 
@@ -45,6 +48,7 @@ public class GameplayController : IInitializable
     private void StartLevel()
     {
         _currentLevel = 1;
+        _completedLevels = 0;
         _currentLevelConfig = _globalConfig.LevelSettings[_currentLevel - 1];
 
         StartGame();
@@ -103,6 +107,7 @@ public class GameplayController : IInitializable
         ChangeTimeScale(1f);
         gameView.ChangeActiveState(false);
 
+        archiveCntr.UpdateSelectedFileCompression(_completedLevels);
         interfaceCntr.OpenScreen(typeof(ArchiveScreen), true);
     }
 
@@ -110,9 +115,15 @@ public class GameplayController : IInitializable
     {
         if (1 - gridSpaceCntr.GetInternalCellPercent() >= _currentLevelConfig.CompletePercent)
         {
-            StopGame();
-            NextLevel();
+            CompleteLevel();
         }
+    }
+    private void CompleteLevel()
+    {
+        _completedLevels++;
+
+        StopGame();
+        NextLevel();
     }
 
     private void ChangeTimeScale(float scale)
