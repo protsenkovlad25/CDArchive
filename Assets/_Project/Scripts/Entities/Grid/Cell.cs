@@ -9,6 +9,9 @@ public class Cell : MonoBehaviour
     [SerializeField] private CellState _state;
     [SerializeField] private SerializedDictionary<CellState, string> _layerByState;
 
+    private Vector2Int _coordPos;
+
+    public Vector2Int CoordPos;
     public CellState State => _state;
     public float Size => _renderer.transform.localScale.x;
 
@@ -20,6 +23,11 @@ public class Cell : MonoBehaviour
     public void Reuse()
     {
         ExternalState();
+    }
+
+    public void SetCoordPos(Vector2Int pos)
+    {
+        _coordPos = pos;
     }
 
     #region StateMachine

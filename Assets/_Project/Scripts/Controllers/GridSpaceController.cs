@@ -18,6 +18,7 @@ public class GridSpaceController : IInitializable
     public void SetGridData(GridData data) => gridSpace.SetData(data);
 
     public void DrawSpace() => gridSpace.DrawSpace();
+    public void RemoveSmallAreas() => gridSpace.RemoveSmallAreas();
 
     public void ChangeGridActiveState() => gridSpace.gameObject.SetActive(false);
 

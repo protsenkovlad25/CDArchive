@@ -31,15 +31,16 @@ public class GameplayController : IInitializable
         pauseScreen.OnContinueClicked += ContinueGame;
 
         gridSpaceCntr.SetGridData(Configs.GlobalSettings.LevelSettings[0].GridData);
-        gridSpaceCntr.DrawSpace();
         gameView.ChangeActiveState(false);
     }
 
     private void StartGame()
     {
         ChangeTimeScale(1f);
+        gridSpaceCntr.DrawSpace();
         gameView.ChangeActiveState(true);
         playerCntr.SetPlayerPos(gridSpaceCntr.GetPosByCoordinates(Configs.GlobalSettings.LevelSettings[0].PlayerStartPos));
+        playerCntr.StartPlayer();
     }
     private void PauseGame()
     {
@@ -51,7 +52,7 @@ public class GameplayController : IInitializable
     }
     private void StopGame()
     {
-        // stop code
+        playerCntr.StopPlayer();
     }
     private void RestartGame()
     {

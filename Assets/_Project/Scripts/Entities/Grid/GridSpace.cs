@@ -30,6 +30,8 @@ public class GridSpace : MonoBehaviour
     [ContextMenu("Init")]
     public void Init()
     {
+        _cellsByPos = new();
+
         _poolCells = new Pool<Cell>(_config.CellPrefab, _startCellParent, 2100);
         _poolCells.OnCreateNew += NewCell;
         
@@ -81,6 +83,7 @@ public class GridSpace : MonoBehaviour
                 cell.transform.parent = parent.transform;
                 cell.name = $"Cell_C{x}_R{y}";
                 cell.Reuse();
+                cell.SetCoordPos(gridPos);
                 if (x >= internalLB.x && x <= internalRT.x &&
                     y >= internalLB.y && y <= internalRT.y)
                 {
@@ -132,7 +135,23 @@ public class GridSpace : MonoBehaviour
     {
         Vector2Int coordPos = GetCoordPosByVectorPos(position);
 
-        return _cellsByPos[coordPos];
+        Cell cell = null;
+        if (_cellsByPos.ContainsKey(coordPos))
+            cell = _cellsByPos[coordPos];
+
+        return cell;
+    }
+    public List<Cell> GetStateCellsNearCell(Cell cell, CellState state)
+    {
+        Vector2Int pos = cell.CoordPos;
+        List<Cell> cells = new();
+
+        if (_cellsByPos[new Vector2Int(pos.x, pos.y + 1)].State == state) cells.Add(_cellsByPos[new Vector2Int(pos.x, pos.y + 1)]);
+        if (_cellsByPos[new Vector2Int(pos.x, pos.y - 1)].State == state) cells.Add(_cellsByPos[new Vector2Int(pos.x, pos.y + 1)]);
+        if (_cellsByPos[new Vector2Int(pos.x + 1, pos.y)].State == state) cells.Add(_cellsByPos[new Vector2Int(pos.x, pos.y + 1)]);
+        if (_cellsByPos[new Vector2Int(pos.x - 1, pos.y)].State == state) cells.Add(_cellsByPos[new Vector2Int(pos.x, pos.y + 1)]);
+        
+        return cells;
     }
 
     private void UpdateCellPositions()
@@ -157,4 +176,90 @@ public class GridSpace : MonoBehaviour
             cell.transform.localPosition = pos - centerOffset + extraOffset;
         }
     }
+
+    #region Methods for Remove Areas
+    public List<List<Vector2Int>> FindAreas()
+    {
+        List<List<Vector2Int>> areas = new();
+        HashSet<Vector2Int> visited = new();
+
+        List<Vector2Int> areaCells;
+        foreach (var pos in _cellsByPos.Keys)
+        {
+            if (_cellsByPos[pos].State == CellState.Internal && !visited.Contains(pos))
+            {
+                areaCells = DFS(pos, visited);
+                areas.Add(areaCells);
+            }
+        }
+
+        return areas;
+    }
+    private List<Vector2Int> DFS(Vector2Int start, HashSet<Vector2Int> visited)
+    {
+        Stack<Vector2Int> stack = new();
+        List<Vector2Int> areaCells = new();
+        stack.Push(start);
+        visited.Add(start);
+
+        Vector2Int cellPos;
+        while (stack.Count > 0)
+        {
+            cellPos = stack.Pop();
+            areaCells.Add(cellPos);
+
+            foreach (var neighbor in GetNeighbors(cellPos))
+            {
+                if (visited.Contains(neighbor)) continue;
+
+                if (_cellsByPos.ContainsKey(neighbor) && _cellsByPos[neighbor].State == CellState.Internal)
+                {
+                    visited.Add(neighbor);
+                    stack.Push(neighbor);
+                }
+            }
+        }
+
+        return areaCells;
+    }
+    private List<Vector2Int> GetNeighbors(Vector2Int position)
+    {
+        List<Vector2Int> neighbors = new();
+        Vector2Int[] directions = new Vector2Int[]
+        {
+            new Vector2Int(0, 1),
+            new Vector2Int(0, -1),
+            new Vector2Int(-1, 0),
+            new Vector2Int(1, 0)
+        };
+
+        Vector2Int neighborPos;
+        foreach (var dir in directions)
+        {
+            neighborPos = position + dir;
+            neighbors.Add(neighborPos);
+        }
+
+        return neighbors;
+    }
+    public void RemoveSmallAreas()
+    {
+        List<List<Vector2Int>> areas = FindAreas();
+
+        areas.Sort((a, b) => a.Count.CompareTo(b.Count));
+
+        List<Vector2Int> largestArea = areas[areas.Count - 1];
+
+        foreach (var area in areas.GetRange(0, areas.Count - 1))
+        {
+            foreach (var cellPos in area)
+            {
+                if (_cellsByPos.ContainsKey(cellPos))
+                {
+                    _cellsByPos[cellPos].ChangeState(CellState.External);
+                }
+            }
+        }
+    }
+    #endregion
 }

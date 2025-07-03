@@ -27,6 +27,7 @@ public class PlayerController : IInitializable, IFixedTickable
         player.OnTriggerEnter += TriggerEnter;
         player.OnTriggerExit += TriggerExit;
         player.Init();
+        player.StopMove();
     }
 
     public void FixedTick()
@@ -42,19 +43,38 @@ public class PlayerController : IInitializable, IFixedTickable
     public void CheckPlayerPos()
     {
         Cell cellOnPos = gridSpaceCntr.GetCellByPos(player.transform.position);
-        
-        if (cellOnPos.State == CellState.Internal)
-        {
-            cellOnPos.ChangeState(CellState.Filled);
-            _filledCells.Add(cellOnPos);
 
-            if (!_isFilling)
-                StartFilling();
-        }
-        else if (cellOnPos.State == CellState.External && _isFilling)
+        if (cellOnPos != null)
         {
-            EndFilling();
+            if (cellOnPos.State == CellState.Internal)
+            {
+                cellOnPos.ChangeState(CellState.Filled);
+                _filledCells.Add(cellOnPos);
+
+                if (!_isFilling)
+                    StartFilling();
+            }
+            else if (cellOnPos.State == CellState.External && _isFilling)
+            {
+                gridSpaceCntr.RemoveSmallAreas();
+                foreach (var cell in _filledCells)
+                    cell.ChangeState(CellState.External);
+
+                EndFilling();
+            }
         }
+    }
+
+    public void StartPlayer()
+    {
+        player.StartMove();
+    }
+    public void StopPlayer()
+    {
+        if (_isFilling)
+            EndFilling();
+
+        player.StopMove();
     }
 
     private void MoveHandler(Vector2Int direction)
@@ -73,9 +93,6 @@ public class PlayerController : IInitializable, IFixedTickable
         player.StopMove();
         player.StartMove();
         player.transform.position = gridSpaceCntr.GetAlignCellPos(player.transform.position);
-
-        foreach (var cell in _filledCells)
-            cell.ChangeState(CellState.External);
 
         _filledCells.Clear();
     }
