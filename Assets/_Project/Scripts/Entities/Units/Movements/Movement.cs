@@ -1,24 +1,35 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Movement : IMovement
+public abstract class Movement : IMovement
 {
-    [SerializeField] private float _speed;
-    [SerializeField] private bool _isStop;
+    [SerializeField] protected float _speed;
+    [SerializeField] protected bool _isStop;
+    [SerializeField] protected GridSettingsConfig _gridConfig;
 
-    public void Move(Rigidbody2D rb, Vector2 direction)
+    protected Rigidbody2D _rb;
+    protected Transform _t;
+    protected Vector2 _direction;
+
+    public virtual void Init(Rigidbody2D rb, Transform t)
     {
-        if (_isStop) return;
-
-        rb.AddForce(direction * _speed);
+        _rb = rb;
+        _t = t;
     }
 
-    public void StartMove()
+    public abstract void Move(Vector2 direction);
+
+    public virtual void Update()
+    {
+        if (_isStop) return;
+    }
+
+    public virtual void StartMove()
     {
         _isStop = false;
     }
 
-    public void StopMove()
+    public virtual void StopMove()
     {
         _isStop = true;
     }

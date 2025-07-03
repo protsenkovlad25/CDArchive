@@ -1,6 +1,7 @@
 using UnityEngine;
+using Zenject;
 
-public class ArchiveController
+public class ArchiveController : IInitializable
 {
     private readonly InterfaceController interfaceController;
 
@@ -14,13 +15,13 @@ public class ArchiveController
         archiveScreen = interfaceController.Screens.ArchiveScreen;
     }
 
-    public void Init()
+    public void Initialize()
     {
         archiveScreen.OnOpened += OpenArchive;
         archiveScreen.OnFileClicked += FileCliked;
         archiveScreen.OnCompressClicked += DeselectFile;
         archiveScreen.LoadFiles();
-        
+
         _selectedFile = null;
     }
 

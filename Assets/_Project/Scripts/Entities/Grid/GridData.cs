@@ -3,18 +3,18 @@ using UnityEngine;
 [System.Serializable]
 public class GridData
 {
-    [SerializeField] private Vector2Int _internalSize;
-    [SerializeField] private Vector2Int _externalLBPoint;
-    [SerializeField] private Vector2Int _externalRTPoint;
+    [SerializeField] private Vector2Int _externalSize;
+    [SerializeField] private Vector2Int _internalLBPoint;
+    [SerializeField] private Vector2Int _internalRTPoint;
 
     public GridData(GridData data)
     {
-        _internalSize = data.InternalSize;
-        _externalLBPoint = data.ExternalLBPoint;
-        _externalRTPoint = data.ExternalRTPoint;
+        _externalSize = data.ExternalSize;
+        _internalLBPoint = data.InternalLBPoint;
+        _internalRTPoint = data.InternalRTPoint;
     }
 
-    public Vector2Int InternalSize { get => _internalSize; set => _internalSize = value; }
-    public Vector2Int ExternalLBPoint { get => _externalLBPoint; set => _externalLBPoint = value; }
-    public Vector2Int ExternalRTPoint { get => _externalRTPoint; set => _externalRTPoint = value; }
+    public Vector2Int ExternalSize { get => _externalSize; set => _externalSize = value; }
+    public Vector2Int InternalLBPoint { get => _internalLBPoint; set => _internalLBPoint = value; }
+    public Vector2Int InternalRTPoint { get => _internalRTPoint; set => _internalRTPoint = value; }
 }

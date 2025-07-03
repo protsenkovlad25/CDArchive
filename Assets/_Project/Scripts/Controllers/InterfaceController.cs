@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Zenject;
 
-public class InterfaceController
+public class InterfaceController : IInitializable
 {
     private readonly ScreensView screensView;
 
@@ -15,7 +16,7 @@ public class InterfaceController
     }
 
     #region Methods
-    public void Init()
+    public void Initialize()
     {
         _screenByType = new();
         foreach (var screen in _screens)

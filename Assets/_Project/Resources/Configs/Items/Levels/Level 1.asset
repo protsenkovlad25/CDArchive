@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   _gridData:
-    _internalSize: {x: 70, y: 30}
-    _externalLBPoint: {x: 3, y: 3}
-    _externalRTPoint: {x: 66, y: 26}
+    _externalSize: {x: 70, y: 30}
+    _internalLBPoint: {x: 3, y: 3}
+    _internalRTPoint: {x: 66, y: 26}
   _playerStartPos: {x: 35, y: 29}
   _completePercent: 0.2
   _shootInterval: 3

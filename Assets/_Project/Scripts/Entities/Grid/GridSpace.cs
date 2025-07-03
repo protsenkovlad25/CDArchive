@@ -5,15 +5,13 @@ using VP;
 public class GridSpace : MonoBehaviour
 {
     [Header("Objects")]
-    [SerializeField] private Cell _cellPrefab;
     [SerializeField] private Transform _cellParent;
     [SerializeField] private Transform _startCellParent;
     [Header("Grid Data")]
     [SerializeField] private GridData _data;
     [SerializeField] private GridBorders _borders;
     [Header("Grid Settings")]
-    [SerializeField] private float _spacing;
-    [SerializeField] private Vector2 _offset;
+    [SerializeField] private GridSettingsConfig _config;
 
     private Dictionary<Vector2Int, Cell> _cellsByPos;
     private List<GameObject> _parents;
@@ -25,14 +23,22 @@ public class GridSpace : MonoBehaviour
         if (_cellsByPos != null)
         {
             UpdateCellPositions();
-            _borders.UpdateBorders(_data.InternalSize, _spacing, _offset);
+            _borders.UpdateBorders(_data.ExternalSize, _config.Spacing, _config.Offset);
         }
     }
 
     [ContextMenu("Init")]
     public void Init()
     {
-        _poolCells = new Pool<Cell>(_cellPrefab, _startCellParent, 2100);
+        _poolCells = new Pool<Cell>(_config.CellPrefab, _startCellParent, 2100);
+        _poolCells.OnCreateNew += NewCell;
+        
+        foreach (var cell in _poolCells.ObjectsList)
+            NewCell(cell);
+    }
+    private void NewCell(Cell newCell)
+    {
+        newCell.Init();
     }
 
     public void SetData(GridData data)
@@ -48,10 +54,10 @@ public class GridSpace : MonoBehaviour
         _cellsByPos = new();
         _parents = new();
 
-        int width = _data.InternalSize.x;
-        int height = _data.InternalSize.y;
-        Vector2Int extLB = _data.ExternalLBPoint;
-        Vector2Int extRT = _data.ExternalRTPoint;
+        int width = _data.ExternalSize.x;
+        int height = _data.ExternalSize.y;
+        Vector2Int internalLB = _data.InternalLBPoint;
+        Vector2Int internalRT = _data.InternalRTPoint;
 
         Cell cell;
         Vector2Int gridPos;
@@ -74,19 +80,18 @@ public class GridSpace : MonoBehaviour
                 cell = _poolCells.Take();
                 cell.transform.parent = parent.transform;
                 cell.name = $"Cell_C{x}_R{y}";
-                cell.Init();
                 cell.Reuse();
-                if (x >= extLB.x && x <= extRT.x &&
-                    y >= extLB.y && y <= extRT.y)
+                if (x >= internalLB.x && x <= internalRT.x &&
+                    y >= internalLB.y && y <= internalRT.y)
                 {
-                    cell.ChangeState(CellState.External);
+                    cell.ChangeState(CellState.Internal);
                 }
                 _cellsByPos[gridPos] = cell;
             }
         }
 
         UpdateCellPositions();
-        _borders.UpdateBorders(_data.InternalSize, _spacing, _offset);
+        _borders.UpdateBorders(_data.ExternalSize, _config.Spacing, _config.Offset);
     }
 
     [ContextMenu("Clear Space")]
@@ -99,12 +104,46 @@ public class GridSpace : MonoBehaviour
         _cellsByPos.Clear();
     }
 
+    public Vector2 GetPosByCoordinates(Vector2Int coord)
+    {
+        return _cellsByPos[coord].transform.position;
+    }
+    public Vector2Int GetCoordPosByVectorPos(Vector2 position)
+    {
+        float spacing = _config.Spacing;
+        Vector2 offset = _config.Offset;
+
+        float offsetX = (_data.ExternalSize.x - 1) * spacing / 2f;
+        float offsetY = (_data.ExternalSize.y - 1) * spacing / 2f;
+        Vector3 centerOffset = new(offsetX, offsetY, 0f);
+        Vector3 extraOffset = new(offset.x, offset.y, 0f);
+
+        int x = Mathf.RoundToInt((position.x + centerOffset.x - extraOffset.x) / spacing);
+        int y = Mathf.RoundToInt((position.y + centerOffset.y - extraOffset.y) / spacing);
+
+        return new Vector2Int(x, y);
+    }
+    public Vector2 GetAlignCellPos(Vector2 position)
+    {
+        Vector2Int coordPos = GetCoordPosByVectorPos(position);
+        return _cellsByPos[coordPos].transform.position;
+    }
+    public Cell GetCellByPos(Vector2 position)
+    {
+        Vector2Int coordPos = GetCoordPosByVectorPos(position);
+
+        return _cellsByPos[coordPos];
+    }
+
     private void UpdateCellPositions()
     {
-        float offsetX = (_data.InternalSize.x - 1) * _spacing / 2f;
-        float offsetY = (_data.InternalSize.y - 1) * _spacing / 2f;
+        float spacing = _config.Spacing;
+        Vector2 offset = _config.Offset;
+
+        float offsetX = (_data.ExternalSize.x - 1) * spacing / 2f;
+        float offsetY = (_data.ExternalSize.y - 1) * spacing / 2f;
         Vector3 centerOffset = new(offsetX, offsetY, 0f);
-        Vector3 extraOffset = new(_offset.x, _offset.y, 0f);
+        Vector3 extraOffset = new(offset.x, offset.y, 0f);
         
         Cell cell;
         Vector3 pos;
@@ -114,7 +153,7 @@ public class GridSpace : MonoBehaviour
             gridPos = kvp.Key;
             cell = kvp.Value;
 
-            pos = new(gridPos.x * _spacing, gridPos.y * _spacing, 0f);
+            pos = new(gridPos.x * spacing, gridPos.y * spacing, 0f);
             cell.transform.localPosition = pos - centerOffset + extraOffset;
         }
     }

@@ -2,13 +2,17 @@ using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 
-public class InputController : ITickable
+public class InputController : IInitializable, ITickable
 {
     public event UnityAction<Vector2Int> OnMoveInput;
 
     public InputController()
     {
 
+    }
+
+    public void Initialize()
+    {
     }
 
     public void Tick()

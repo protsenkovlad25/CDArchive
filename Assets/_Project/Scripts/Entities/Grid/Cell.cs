@@ -9,14 +9,17 @@ public class Cell : MonoBehaviour
     [SerializeField] private CellState _state;
     [SerializeField] private SerializedDictionary<CellState, string> _layerByState;
 
+    public CellState State => _state;
+    public float Size => _renderer.transform.localScale.x;
+
     public void Init()
     {
-        InternalState();
+        ExternalState();
     }
 
     public void Reuse()
     {
-        InternalState();
+        ExternalState();
     }
 
     #region StateMachine
@@ -27,14 +30,14 @@ public class Cell : MonoBehaviour
         _state = CellState.Internal;
         SetLayerByState();
         
-        _renderer.color = Color.cyan;
+        _renderer.color = Color.black;
     }
     private void ExternalState()
     {
         _state = CellState.External;
         SetLayerByState();
 
-        _renderer.color = Color.black;
+        _renderer.color = Color.cyan;
     }
     private void FilledState()
     {

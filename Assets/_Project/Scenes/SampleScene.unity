@@ -165,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _screens: {fileID: 7479550236811683128}
   _gameView: {fileID: 755852194}
+  _player: {fileID: 832981117}
 --- !u!1 &429107245
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +313,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.18490559, g: 0.18490559, b: 0.18490559, a: 0}
+  m_BackGroundColor: {r: 0.18490559, g: 0.18490559, b: 0.18490559, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -565,6 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSpace: {fileID: 919163076}
+  _player: {fileID: 832981117}
   _entitiesParent: {fileID: 522406164}
   _activeEntitiesParent: {fileID: 844763295}
 --- !u!1001 &832981115
@@ -585,7 +587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7547984700041468274, guid: 377926280f6dba04ab04dab22c3c4ea8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.23
       objectReference: {fileID: 0}
     - target: {fileID: 7547984700041468274, guid: 377926280f6dba04ab04dab22c3c4ea8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -619,6 +621,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7587459377001225923, guid: 377926280f6dba04ab04dab22c3c4ea8, type: 3}
+      propertyPath: managedReferences[425335140843520070]._speed
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -629,6 +635,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7547984700041468274, guid: 377926280f6dba04ab04dab22c3c4ea8, type: 3}
   m_PrefabInstance: {fileID: 832981115}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &832981117 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3342214806122239469, guid: 377926280f6dba04ab04dab22c3c4ea8, type: 3}
+  m_PrefabInstance: {fileID: 832981115}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e4637cbfa81a744d8286d042faa241c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &843726179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,6 +1065,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 797536593592806917, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 868665223271885447, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1222,6 +1243,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2158872038495172486, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236350674885599266, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
+      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2383300163248807261, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
@@ -2074,15 +2099,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7965817507340981671, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7965817507340981671, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7965817507340981671, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8451115339661713945, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
       propertyPath: m_AnchorMax.y

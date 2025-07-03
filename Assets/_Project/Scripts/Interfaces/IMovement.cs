@@ -2,7 +2,9 @@ using UnityEngine;
 
 public interface IMovement
 {
-    void Move(Rigidbody2D rb, Vector2 direction);
+    void Init(Rigidbody2D rb, Transform t);
+    void Move(Vector2 direction);
+    void Update();
     void StartMove();
     void StopMove();
 }

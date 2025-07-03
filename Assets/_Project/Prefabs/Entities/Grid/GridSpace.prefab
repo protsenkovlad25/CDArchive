@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c756b7c5500c54da446fc328f51644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cellPrefab: {fileID: 7901920361152506715, guid: 965945b6205f96e498ec1d888e3c76d5, type: 3}
   _cellParent: {fileID: 4369339799833757365}
   _startCellParent: {fileID: 2111490182202878111}
   _data:
@@ -55,8 +54,7 @@ MonoBehaviour:
     _externalLBPoint: {x: 3, y: 3}
     _externalRTPoint: {x: 66, y: 26}
   _borders: {fileID: 8892696985996507175}
-  _spacing: 0.25
-  _offset: {x: 0, y: 0.6}
+  _config: {fileID: 11400000, guid: fcfacf6bce1d8c047bcf93cad7e1713e, type: 2}
 --- !u!1 &5994618337866212169
 GameObject:
   m_ObjectHideFlags: 0

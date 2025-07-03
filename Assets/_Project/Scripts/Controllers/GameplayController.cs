@@ -1,33 +1,37 @@
 using UnityEngine;
+using Zenject;
 
-public class GameplayController
+public class GameplayController : IInitializable
 {
-    private readonly InterfaceController interfaceController;
+    private readonly InterfaceController interfaceCntr;
+    private readonly GridSpaceController gridSpaceCntr;
+    private readonly PlayerController playerCntr;
     private readonly GameView gameView;
 
     private readonly GameScreen gameScreen;
     private readonly PauseScreen pauseScreen;
-    private readonly GridSpace gridSpace;
 
-    public GameplayController(InterfaceController interfaceController, GameView gameView)
+    public GameplayController(InterfaceController interfaceCntr, GridSpaceController gridSpaceCntr,
+        PlayerController playerCntr, GameView gameView)
     {
-        this.interfaceController = interfaceController;
+        this.interfaceCntr = interfaceCntr;
+        this.gridSpaceCntr = gridSpaceCntr;
+        this.playerCntr = playerCntr;
         this.gameView = gameView;
 
-        gridSpace = gameView.GameSpace;
-        gameScreen = interfaceController.Screens.GameScreen;
-        pauseScreen = interfaceController.Screens.PauseScreen;
+        gameScreen = interfaceCntr.Screens.GameScreen;
+        pauseScreen = interfaceCntr.Screens.PauseScreen;
     }
 
-    public void Init()
+    public void Initialize()
     {
         gameScreen.OnOpened += StartGame;
         gameScreen.OnPauseClicked += PauseGame;
         pauseScreen.OnAbortClicked += AbortGame;
         pauseScreen.OnContinueClicked += ContinueGame;
 
-        gridSpace.Init();
-        gridSpace.DrawSpace();
+        gridSpaceCntr.SetGridData(Configs.GlobalSettings.LevelSettings[0].GridData);
+        gridSpaceCntr.DrawSpace();
         gameView.ChangeActiveState(false);
     }
 
@@ -35,6 +39,7 @@ public class GameplayController
     {
         ChangeTimeScale(1f);
         gameView.ChangeActiveState(true);
+        playerCntr.SetPlayerPos(gridSpaceCntr.GetPosByCoordinates(Configs.GlobalSettings.LevelSettings[0].PlayerStartPos));
     }
     private void PauseGame()
     {

@@ -1,6 +1,7 @@
 using UnityEngine;
+using Zenject;
 
-public class GameController
+public class GameController : IInitializable
 {
     private readonly InterfaceController interfaceController;
 
@@ -9,7 +10,7 @@ public class GameController
         this.interfaceController = interfaceController; 
     }
 
-    public void Init()
+    public void Initialize()
     {
         ActivateGame();
     }
