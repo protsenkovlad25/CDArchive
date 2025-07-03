@@ -15,5 +15,14 @@ public class GameScreen : Screen
         base.Init();
 
         _gamePanel.OnPauseClicked += () => OnPauseClicked?.Invoke();
+
+        _topPanel.Init();
+        _gamePanel.Init();
+        _gameBottomPanel.Init();
+    }
+
+    public void UpdateProgress(float value)
+    {
+        _gameBottomPanel.UpdateProgress(value);
     }
 }

@@ -11,6 +11,10 @@ public class GameplayController : IInitializable
     private readonly GameScreen gameScreen;
     private readonly PauseScreen pauseScreen;
 
+    private int _currentLevel;
+    private GlobalSettingsConfig _globalConfig;
+    private LevelSettingsConfig _currentLevelConfig;
+
     public GameplayController(InterfaceController interfaceCntr, GridSpaceController gridSpaceCntr,
         PlayerController playerCntr, GameView gameView)
     {
@@ -25,22 +29,50 @@ public class GameplayController : IInitializable
 
     public void Initialize()
     {
-        gameScreen.OnOpened += StartGame;
+        _globalConfig = Configs.GlobalSettings;
+
+        gameScreen.OnOpened += StartLevel;
         gameScreen.OnPauseClicked += PauseGame;
         pauseScreen.OnAbortClicked += AbortGame;
         pauseScreen.OnContinueClicked += ContinueGame;
 
-        gridSpaceCntr.SetGridData(Configs.GlobalSettings.LevelSettings[0].GridData);
+        gridSpaceCntr.OnUpdatedSpace += UpdateProgress;
+        gridSpaceCntr.OnUpdatedSpace += CheckComplete;
+        
         gameView.ChangeActiveState(false);
     }
 
+    private void StartLevel()
+    {
+        _currentLevel = 1;
+        _currentLevelConfig = _globalConfig.LevelSettings[_currentLevel - 1];
+
+        StartGame();
+    }
+    private void NextLevel()
+    {
+        if (_currentLevel < _globalConfig.LevelSettings.Count)
+        {
+            _currentLevel++;
+            _currentLevelConfig = _globalConfig.LevelSettings[_currentLevel - 1];
+
+            StartGame();
+        }
+        else EndGame();
+    }
     private void StartGame()
     {
         ChangeTimeScale(1f);
+        
+        gridSpaceCntr.SetGridData(_currentLevelConfig.GridData);
         gridSpaceCntr.DrawSpace();
-        gameView.ChangeActiveState(true);
-        playerCntr.SetPlayerPos(gridSpaceCntr.GetPosByCoordinates(Configs.GlobalSettings.LevelSettings[0].PlayerStartPos));
+        
+        playerCntr.SetPlayerPos(gridSpaceCntr.GetPosByCoordinates(_currentLevelConfig.PlayerStartPos));
         playerCntr.StartPlayer();
+        
+        gameView.ChangeActiveState(true);
+        
+        UpdateProgress();
     }
     private void PauseGame()
     {
@@ -65,11 +97,33 @@ public class GameplayController : IInitializable
         ChangeTimeScale(1f);
         gameView.ChangeActiveState(false);
     }
+    private void EndGame()
+    {
+        StopGame();
+        ChangeTimeScale(1f);
+        gameView.ChangeActiveState(false);
+
+        interfaceCntr.OpenScreen(typeof(ArchiveScreen), true);
+    }
+
+    private void CheckComplete()
+    {
+        if (1 - gridSpaceCntr.GetInternalCellPercent() >= _currentLevelConfig.CompletePercent)
+        {
+            StopGame();
+            NextLevel();
+        }
+    }
 
     private void ChangeTimeScale(float scale)
     {
         Time.timeScale = scale;
 
         Debug.Log($"TimeScale changed to - {scale}");
+    }
+
+    private void UpdateProgress()
+    {
+        gameScreen.UpdateProgress(1 - gridSpaceCntr.GetInternalCellPercent());
     }
 }

@@ -56,10 +56,7 @@ public class PlayerController : IInitializable, IFixedTickable
             }
             else if (cellOnPos.State == CellState.External && _isFilling)
             {
-                gridSpaceCntr.RemoveSmallAreas();
-                foreach (var cell in _filledCells)
-                    cell.ChangeState(CellState.External);
-
+                gridSpaceCntr.RemoveSmallAreas(_filledCells);
                 EndFilling();
             }
         }

@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using VP;
 
 public class GridSpace : MonoBehaviour
 {
+    public event UnityAction OnUpdatedSpace;
+
     [Header("Objects")]
     [SerializeField] private Transform _cellParent;
     [SerializeField] private Transform _startCellParent;
@@ -13,9 +16,11 @@ public class GridSpace : MonoBehaviour
     [Header("Grid Settings")]
     [SerializeField] private GridSettingsConfig _config;
 
+    private int _startInternalCells;
+    private int _currentInternalCells;
+
     private Dictionary<Vector2Int, Cell> _cellsByPos;
     private List<GameObject> _parents;
-
     private Pool<Cell> _poolCells;
 
     private void OnValidate()
@@ -31,6 +36,10 @@ public class GridSpace : MonoBehaviour
     public void Init()
     {
         _cellsByPos = new();
+        _parents = new();
+
+        _startInternalCells = 0;
+        _currentInternalCells = 0;
 
         _poolCells = new Pool<Cell>(_config.CellPrefab, _startCellParent, 2100);
         _poolCells.OnCreateNew += NewCell;
@@ -52,9 +61,6 @@ public class GridSpace : MonoBehaviour
     public void DrawSpace()
     {
         ClearSpace();
-
-        _cellsByPos = new();
-        _parents = new();
 
         int width = _data.ExternalSize.x;
         int height = _data.ExternalSize.y;
@@ -84,9 +90,12 @@ public class GridSpace : MonoBehaviour
                 cell.name = $"Cell_C{x}_R{y}";
                 cell.Reuse();
                 cell.SetCoordPos(gridPos);
+                
                 if (x >= internalLB.x && x <= internalRT.x &&
                     y >= internalLB.y && y <= internalRT.y)
                 {
+                    _startInternalCells++;
+                    _currentInternalCells++;
                     cell.ChangeState(CellState.Internal);
                 }
                 _cellsByPos[gridPos] = cell;
@@ -100,10 +109,10 @@ public class GridSpace : MonoBehaviour
     [ContextMenu("Clear Space")]
     public void ClearSpace()
     {
-        if (_cellsByPos == null) return;
+        _startInternalCells = 0;
+        _currentInternalCells = 0;
 
         _poolCells.ReturnAll();
-
         _cellsByPos.Clear();
     }
 
@@ -152,6 +161,10 @@ public class GridSpace : MonoBehaviour
         if (_cellsByPos[new Vector2Int(pos.x - 1, pos.y)].State == state) cells.Add(_cellsByPos[new Vector2Int(pos.x, pos.y + 1)]);
         
         return cells;
+    }
+    public float GetInternalCellPercent()
+    {
+        return (float)_currentInternalCells / _startInternalCells;
     }
 
     private void UpdateCellPositions()
@@ -242,7 +255,7 @@ public class GridSpace : MonoBehaviour
 
         return neighbors;
     }
-    public void RemoveSmallAreas()
+    public void RemoveSmallAreas(List<Cell> filledCells)
     {
         List<List<Vector2Int>> areas = FindAreas();
 
@@ -257,9 +270,18 @@ public class GridSpace : MonoBehaviour
                 if (_cellsByPos.ContainsKey(cellPos))
                 {
                     _cellsByPos[cellPos].ChangeState(CellState.External);
+                    _currentInternalCells--;
                 }
             }
         }
+
+        foreach (var cell in filledCells)
+        {
+            cell.ChangeState(CellState.External);
+            _currentInternalCells--;
+        }
+
+        OnUpdatedSpace?.Invoke();
     }
     #endregion
 }

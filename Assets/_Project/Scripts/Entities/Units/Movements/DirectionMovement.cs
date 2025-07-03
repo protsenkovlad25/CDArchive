@@ -8,6 +8,8 @@ public class DirectionMovement : Movement
 
     public override void Move(Vector2 direction)
     {
+        if (_isStop) return;
+
         if (direction != Vector2.zero)
         {
             _t.position = _gridCntr.GetAlignCellPos(_t.position);

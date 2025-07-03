@@ -54,7 +54,7 @@ MonoBehaviour:
   _direction: 0
   _openTime: 0
   _closeTime: 0
-  _lockImage: {fileID: 0}
+  _progressPanel: {fileID: 6651835053846665450}
 --- !u!1001 &366277377068443452
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,6 +104,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+--- !u!114 &6651835053846665450 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6432644298397237206, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
+  m_PrefabInstance: {fileID: 366277377068443452}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0345cbbae732ba4ebf5b46d064fafaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8302702990185927863 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8515294469308167051, guid: 5fe1b2ad9f273c1429a7fd74e854eeaa, type: 3}
