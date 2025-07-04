@@ -29,4 +29,11 @@ public class DiscData
     [JsonIgnore] public float Capacity { get => _capacity; set => _capacity = value; }
     [JsonIgnore] public float UsedSpace { get => _usedSpace; set => _usedSpace = value; }
     [JsonIgnore] public List<GameFileData> Files { get => _files; set => _files = value; }
+
+    public void AddFile(GameFileData file)
+    {
+        _files.Add(file);
+
+        _usedSpace += file.Size;
+    }
 }

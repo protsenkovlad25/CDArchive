@@ -31,10 +31,27 @@ public class ArchiveScreen : Screen
     {
         _filesPanel.LoadFiles(files);
     }
+    public void LoadDisc(DiscData data)
+    {
+        _discPanel.LoadDisc(data);
+    }
+
+    public void UpdateDiscSpace()
+    {
+        _discPanel.UpdateUsedSpace();
+    }
+    public void UpdateFileSpace(float fileSize, bool isAnim)
+    {
+        _discPanel.UpdateFileSpace(fileSize, isAnim);
+    }
 
     public void ChangeCompressInteract(bool state)
     {
         _filesPanel.ChangeCompressInteract(state);
+    }
+    public void ChangeWriteInteract(bool state)
+    {
+        _discPanel.ChangeWriteInteract(state);
     }
 
     public void ClickMenu()

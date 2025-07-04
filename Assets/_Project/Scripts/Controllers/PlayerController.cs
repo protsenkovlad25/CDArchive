@@ -30,7 +30,7 @@ public class PlayerController : IInitializable, IFixedTickable
         _filledCells = new();
 
         _playerData = saveCntr.LoadPlayerData();
-        CheckLoadedFiles();
+        CheckLoadedData();
 
         player.OnTriggerEnter += TriggerEnter;
         player.OnTriggerExit += TriggerExit;
@@ -38,23 +38,46 @@ public class PlayerController : IInitializable, IFixedTickable
         player.StopMove();
     }
 
-    private void CheckLoadedFiles()
+    private void CheckLoadedData()
     {
+        List<GameFileData> gameFiles = _playerData.GameFiles;
         List<GameFileConfig> configFiles = Configs.GlobalSettings.GameFileSettings;
-        if (_playerData.GameFiles.Count < configFiles.Count)
+        if (gameFiles.Count < configFiles.Count)
         {
-            int startIndex = _playerData.GameFiles.Count;
+            int startIndex = gameFiles.Count;
             int count = configFiles.Count;
             for (int i = startIndex; i < count; i++)
             {
-                _playerData.GameFiles.Add(new GameFileData(configFiles[i].GameFileData));
+                gameFiles.Add(new GameFileData(configFiles[i].GameFileData));
             }
         }
-        saveCntr.SavePlayerData(_playerData);
+
+        for (int i = gameFiles.Count - 1; i >= 0; i--)
+        {
+            if (_playerData.DiscData.Files.Exists(f => f.Id == gameFiles[i].Id))
+            {
+                gameFiles.Remove(gameFiles[i]);
+            }
+        }
+
+        SaveData();
     }
     public void SaveData()
     {
         saveCntr.SavePlayerData(_playerData);
+    }
+    public void WriteFileOnDisc(GameFileData file)
+    {
+        _playerData.DiscData.AddFile(file);
+    }
+    public bool CanWriteFile(GameFileData file)
+    {
+        return file.Size + _playerData.DiscData.UsedSpace <= _playerData.DiscData.Capacity;
+    }
+    public bool IsDiscFilled()
+    {
+        DiscData data = _playerData.DiscData;
+        return data.UsedSpace / data.Capacity > 0.95f;
     }
 
     public void FixedTick()

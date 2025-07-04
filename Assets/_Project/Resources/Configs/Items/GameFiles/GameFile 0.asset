@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1a2cdac26f0c794b970aaf1e2e9a12e, type: 3}
-  m_Name: DiscConfig
+  m_Script: {fileID: 11500000, guid: 1902b10758ea460448533e77fb9b939b, type: 3}
+  m_Name: GameFile 0
   m_EditorClassIdentifier: 
-  _discData:
-    _capacity: 300
-    _usedSpace: 50
-    _files:
-    - _id: gameFile_0
-      _name: File 0
-      _size: 50
-      _compression: 0
+  _gameFileData:
+    _id: gameFile_0
+    _name: File 0
+    _size: 50
+    _compression: 0

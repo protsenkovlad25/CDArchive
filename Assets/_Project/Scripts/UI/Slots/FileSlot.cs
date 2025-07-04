@@ -75,6 +75,10 @@ public class FileSlot : MonoBehaviour
         ActivateIndicators(_file.CompressionLevel);
     }
 
+    public void ChangeActiveState(bool state)
+    {
+        gameObject.SetActive(state);
+    }    
     public void ChangeSelectedState(bool state)
     {
         _isSelected = state;

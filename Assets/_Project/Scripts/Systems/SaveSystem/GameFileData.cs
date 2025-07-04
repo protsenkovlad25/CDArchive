@@ -25,7 +25,7 @@ public class GameFileData
     {
         _id = data.Id;
         _name = data.Name;
-        _size = data.Size;
+        _size = data.TotalSize;
         _compression = data.CompressionLevel;
     }
 

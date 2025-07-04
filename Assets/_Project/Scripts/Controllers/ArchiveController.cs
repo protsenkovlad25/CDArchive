@@ -21,14 +21,16 @@ public class ArchiveController : IInitializable
     {
         archiveScreen.OnOpened += OpenArchive;
         archiveScreen.OnFileClicked += FileCliked;
+        archiveScreen.OnWriteClicked += WriteClicked;
         archiveScreen.LoadFiles(playerCntr.PlayerData.GameFiles);
+        archiveScreen.LoadDisc(playerCntr.PlayerData.DiscData);
 
         _selectedFile = null;
     }
 
     private void OpenArchive()
     {
-
+        DeselectFile();
     }
 
     public void UpdateSelectedFileCompression(int compressionLvl)
@@ -36,6 +38,15 @@ public class ArchiveController : IInitializable
         _selectedFile.File.UpdateCompressionLevel(compressionLvl);
         _selectedFile.UpdateData();
         playerCntr.SaveData();
+    }
+
+    private void WriteClicked()
+    {
+        playerCntr.WriteFileOnDisc(_selectedFile.File);
+        archiveScreen.UpdateDiscSpace();
+        _selectedFile.ChangeActiveState(false);
+
+        DeselectFile();
     }
 
     private void FileCliked(FileSlot file)
@@ -55,13 +66,22 @@ public class ArchiveController : IInitializable
         file.ChangeSelectedState(true);
         _selectedFile = file;
 
+        if (playerCntr.CanWriteFile(file.File))
+            archiveScreen.ChangeWriteInteract(true);
+
+        if (!playerCntr.IsDiscFilled())
+            archiveScreen.UpdateFileSpace(file.File.Size, true);
+        
         archiveScreen.ChangeCompressInteract(true);
     }
     private void DeselectFile()
     {
+        archiveScreen.UpdateFileSpace(0, true);
+
         _selectedFile?.ChangeSelectedState(false);
         _selectedFile = null;
 
+        archiveScreen.ChangeWriteInteract(false);
         archiveScreen.ChangeCompressInteract(false);
     }
 }
