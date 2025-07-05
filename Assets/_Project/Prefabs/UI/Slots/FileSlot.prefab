@@ -132,8 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _background: {fileID: 6320999573820111672}
   _nameText: {fileID: 8352583590789945447}
-  _simpleColor: {r: 1, g: 1, b: 1, a: 1}
-  _selectedColor: {r: 0.5415094, g: 1, b: 0.9388031, a: 1}
+  _simpleColor: {r: 0.8352941, g: 0.53333336, b: 1, a: 1}
+  _selectedColor: {r: 0.3903524, g: 0.9622642, b: 0.93892086, a: 1}
   _indicatorPrefab: {fileID: 3561584657443531570, guid: 28264d899c53bb547857701ab22348e6, type: 3}
   _indicatorsParent: {fileID: 9097253739900427922}
 --- !u!1 &5222297701721300876
@@ -194,14 +194,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8352941, g: 0.53333336, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -5993112012373322873, guid: 2ebd29632ec26914294ae368946983bd, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 1.3
 --- !u!1 &7680356961067250423
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,8 +278,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: File 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 89171503f005bab4a93ec62809cf1ae8, type: 2}
+  m_sharedMaterial: {fileID: -7832885348815982186, guid: 89171503f005bab4a93ec62809cf1ae8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -303,14 +303,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.95
+  m_fontSize: 42.15
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 100
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_fontStyle: 1
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

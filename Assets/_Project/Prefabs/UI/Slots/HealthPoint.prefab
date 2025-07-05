@@ -66,8 +66,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: 1e7d027d4c3110d45814ab0da907d54e, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: -5993112012373322873, guid: 2ebd29632ec26914294ae368946983bd, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.85
 --- !u!114 &3970990411974531490
 MonoBehaviour:
   m_ObjectHideFlags: 0

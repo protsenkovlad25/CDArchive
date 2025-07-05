@@ -13,11 +13,22 @@ public class Unit : MonoBehaviour, IMoving, IAttacking
     [Header("Data")]
     [SerializeField, SerializeReference] private IMovement _movement;
     [SerializeField, SerializeReference] private IAttack _attack;
+    [Header("Events")]
+    [SerializeField] private UnityEvent _onEnabled;
+    [SerializeField] private UnityEvent _onDisabled;
 
     [Inject] private DiContainer _container;
 
     public IAttack Attack => _attack;
 
+    private void OnEnable()
+    {
+        _onEnabled?.Invoke();
+    }
+    private void OnDisable()
+    {
+        _onDisabled?.Invoke();
+    }
     private void FixedUpdate()
     {
         _movement?.Update();

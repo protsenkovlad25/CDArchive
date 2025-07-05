@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3871403669642940833, guid: e7254d235157c8a439e26c6fb280998d, type: 3}
       propertyPath: m_fontSize
-      value: 44.8
+      value: 46.1
       objectReference: {fileID: 0}
     - target: {fileID: 4056936031119098541, guid: e7254d235157c8a439e26c6fb280998d, type: 3}
       propertyPath: m_Name
@@ -67,11 +67,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 708029270396872232, guid: f981b5bc5a6ff0547af318c45475b9df, type: 3}
       propertyPath: m_fontSize
-      value: 34.55
+      value: 35.55
       objectReference: {fileID: 0}
     - target: {fileID: 1783897110991233976, guid: f981b5bc5a6ff0547af318c45475b9df, type: 3}
       propertyPath: m_fontSize
-      value: 34.55
+      value: 35.55
       objectReference: {fileID: 0}
     - target: {fileID: 4539507350157833091, guid: f981b5bc5a6ff0547af318c45475b9df, type: 3}
       propertyPath: m_Name
@@ -107,7 +107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8683894334472600259, guid: f981b5bc5a6ff0547af318c45475b9df, type: 3}
       propertyPath: m_fontSize
-      value: 34.55
+      value: 35.55
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -302,10 +302,22 @@ PrefabInstance:
       propertyPath: m_text
       value: Compess file
       objectReference: {fileID: 0}
+    - target: {fileID: 6572399362674874722, guid: 94b3f050c28a88c469cfe376ed1ffea6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 43.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572399362674874722, guid: 94b3f050c28a88c469cfe376ed1ffea6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 42
+      objectReference: {fileID: 0}
     - target: {fileID: 7398698007427701990, guid: 94b3f050c28a88c469cfe376ed1ffea6, type: 3}
       propertyPath: m_Name
       value: TopPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 8558940318772086572, guid: 94b3f050c28a88c469cfe376ed1ffea6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2680732492154032246, guid: a303a3e57f19894499b4f096b170a46b, type: 3}
     - target: {fileID: 8880406594235816161, guid: 94b3f050c28a88c469cfe376ed1ffea6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

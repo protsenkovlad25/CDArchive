@@ -163,6 +163,14 @@ MonoBehaviour:
   _rb: {fileID: 3859244263101213531}
   _movement:
     rid: -2
+  _attack:
+    rid: -2
+  _onEnabled:
+    m_PersistentCalls:
+      m_Calls: []
+  _onDisabled:
+    m_PersistentCalls:
+      m_Calls: []
   references:
     version: 2
     RefIds:

@@ -19,5 +19,5 @@ MonoBehaviour:
   _playerStartPos: {x: 35, y: 29}
   _enemyStartPos: {x: 35, y: 15}
   _playerHealths: 3
-  _completePercent: 0.4
+  _completePercent: 0.3
   _shootInterval: 3

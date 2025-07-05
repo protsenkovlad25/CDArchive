@@ -161,6 +161,6 @@ public class GameplayController : IInitializable
 
     private void UpdateProgress()
     {
-        gameScreen.UpdateProgress(1 - gridSpaceCntr.GetInternalCellPercent());
+        gameScreen.UpdateProgress((1 - gridSpaceCntr.GetInternalCellPercent()) / _currentLevelConfig.CompletePercent);
     }
 }
