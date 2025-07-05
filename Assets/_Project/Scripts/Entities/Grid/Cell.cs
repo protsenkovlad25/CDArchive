@@ -5,13 +5,20 @@ public enum CellState { Internal, External, Filled }
 
 public class Cell : MonoBehaviour
 {
+    [System.Serializable]
+    private class StateData
+    {
+        public string Layer;
+        public Color Color;
+    }
+
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private CellState _state;
-    [SerializeField] private SerializedDictionary<CellState, string> _layerByState;
+    [SerializeField] private SerializedDictionary<CellState, StateData> _dataByState;
 
     private Vector2Int _coordPos;
 
-    public Vector2Int CoordPos;
+    public Vector2Int CoordPos => _coordPos;
     public CellState State => _state;
     public float Size => _renderer.transform.localScale.x;
 
@@ -36,29 +43,24 @@ public class Cell : MonoBehaviour
     private void InternalState()
     {
         _state = CellState.Internal;
-        SetLayerByState();
-        
-        _renderer.color = Color.black;
+        SetDataByState();
     }
     private void ExternalState()
     {
         _state = CellState.External;
-        SetLayerByState();
-
-        _renderer.color = Color.cyan;
+        SetDataByState();
     }
     private void FilledState()
     {
         _state = CellState.Filled;
-        SetLayerByState();
-
-        _renderer.color = Color.yellow;
+        SetDataByState();
     }
     #endregion
 
-    private void SetLayerByState()
+    private void SetDataByState()
     {
-        gameObject.layer = LayerMask.NameToLayer(_layerByState[_state]);
+        gameObject.layer = LayerMask.NameToLayer(_dataByState[_state].Layer);
+        _renderer.color = _dataByState[_state].Color;
     }
 
     public void ChangeState(CellState state)

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8645397713432908431}
   - component: {fileID: 4087198339647720528}
   - component: {fileID: 7276092935441917738}
+  - component: {fileID: 3970990411974531490}
   m_Layer: 5
   m_Name: HealthPoint
   m_TagString: Untagged
@@ -75,3 +76,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3970990411974531490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8775536224107762120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0796665229ad01249a790f03bf7fcac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _image: {fileID: 7276092935441917738}
+  _activeColor: {r: 0.3150943, g: 1, b: 0.37304792, a: 1}
+  _inactiveColor: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}

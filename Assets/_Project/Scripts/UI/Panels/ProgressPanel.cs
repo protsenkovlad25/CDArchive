@@ -14,8 +14,8 @@ public class ProgressPanel : MonoBehaviour
         _slider.value = 0;
     }
 
-    public void UpdateProgress(float value)
+    public void UpdateProgress(float value, bool isAnim = true)
     {
-        _slider.DOValue(value, _changeDuration);
+        _slider.DOValue(value, isAnim ? _changeDuration : 0);
     }
 }

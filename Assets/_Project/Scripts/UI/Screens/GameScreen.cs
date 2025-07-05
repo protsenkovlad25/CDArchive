@@ -25,4 +25,13 @@ public class GameScreen : Screen
     {
         _gameBottomPanel.UpdateProgress(value);
     }
+
+    public void ActivateHealths(int count)
+    {
+        _gameBottomPanel.ActivateHealths(count);
+    }
+    public void RemoveHealth()
+    {
+        _gameBottomPanel.RemoveHealth();
+    }
 }

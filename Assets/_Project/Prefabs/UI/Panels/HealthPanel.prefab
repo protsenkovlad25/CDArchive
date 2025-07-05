@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3939754008702470499}
+  - component: {fileID: 2892704996418479131}
   m_Layer: 5
   m_Name: HealthPanel
   m_TagString: Untagged
@@ -37,6 +38,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2892704996418479131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2378041871783643435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1599fab8ca61c7040bb41fa9e1c7c327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthPrefab: {fileID: 3970990411974531490, guid: 6f6ffe2e859d6a041b2a9c10774c11be, type: 3}
+  _healthsParent: {fileID: 4465495255859272541}
 --- !u!1 &4398509000389833677
 GameObject:
   m_ObjectHideFlags: 0

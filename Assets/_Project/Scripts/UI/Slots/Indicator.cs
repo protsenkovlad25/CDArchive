@@ -9,13 +9,18 @@ public class Indicator : MonoBehaviour
     [Header("Inactive State")]
     [SerializeField] private Color _inactiveColor;
 
+    private bool _isActive;
+
+    public bool IsActive => _isActive;
+
     public void Init()
     {
-
+        _isActive = false;
     }
 
     public void ChangeActiveState(bool state)
     {
+        _isActive = state;
         _image.color = state ? _activeColor : _inactiveColor;
     }
 }

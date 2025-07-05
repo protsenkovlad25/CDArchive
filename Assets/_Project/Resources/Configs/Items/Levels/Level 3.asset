@@ -17,6 +17,7 @@ MonoBehaviour:
     _internalLBPoint: {x: 3, y: 3}
     _internalRTPoint: {x: 66, y: 26}
   _playerStartPos: {x: 35, y: 29}
-  _enemiesCount: 0
-  _completePercent: 0.9
+  _enemyStartPos: {x: 35, y: 15}
+  _playerHealths: 3
+  _completePercent: 0.6
   _shootInterval: 1

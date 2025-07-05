@@ -6,6 +6,7 @@ public class GameplayController : IInitializable
     private readonly InterfaceController interfaceCntr;
     private readonly GridSpaceController gridSpaceCntr;
     private readonly ArchiveController archiveCntr;
+    private readonly EnemiesController enemiesCntr;
     private readonly PlayerController playerCntr;
     private readonly GameView gameView;
 
@@ -13,16 +14,19 @@ public class GameplayController : IInitializable
     private readonly PauseScreen pauseScreen;
 
     private int _currentLevel;
+    private int _currentHealths;
     private int _completedLevels;
     private GlobalSettingsConfig _globalConfig;
     private LevelSettingsConfig _currentLevelConfig;
 
     public GameplayController(InterfaceController interfaceCntr, GridSpaceController gridSpaceCntr,
-        ArchiveController archiveCntr, PlayerController playerCntr, GameView gameView)
+        ArchiveController archiveCntr, EnemiesController enemiesCntr,
+        PlayerController playerCntr, GameView gameView)
     {
         this.interfaceCntr = interfaceCntr;
         this.gridSpaceCntr = gridSpaceCntr;
         this.archiveCntr = archiveCntr;
+        this.enemiesCntr = enemiesCntr;
         this.playerCntr = playerCntr;
         this.gameView = gameView;
 
@@ -41,7 +45,9 @@ public class GameplayController : IInitializable
 
         gridSpaceCntr.OnUpdatedSpace += UpdateProgress;
         gridSpaceCntr.OnUpdatedSpace += CheckComplete;
-        
+
+        playerCntr.Player.OnCollisionEnter += CheckCollision;
+
         gameView.ChangeActiveState(false);
     }
 
@@ -70,7 +76,14 @@ public class GameplayController : IInitializable
         
         gridSpaceCntr.SetGridData(_currentLevelConfig.GridData);
         gridSpaceCntr.DrawSpace();
-        
+
+        _currentHealths = _currentLevelConfig.PlayerHealths;
+        gameScreen.ActivateHealths(_currentLevelConfig.PlayerHealths);
+
+        Unit enemy = enemiesCntr.SpawnEnemy(EnemyType.ShootEnemy, gridSpaceCntr.GetPosByCoordinates(_currentLevelConfig.EnemyStartPos));
+        enemy.Attack.ShootInterval = _currentLevelConfig.ShootInterval;
+        enemy.StartBehavior();
+
         playerCntr.SetPlayerPos(gridSpaceCntr.GetPosByCoordinates(_currentLevelConfig.PlayerStartPos));
         playerCntr.StartPlayer();
         
@@ -89,11 +102,7 @@ public class GameplayController : IInitializable
     private void StopGame()
     {
         playerCntr.StopPlayer();
-    }
-    private void RestartGame()
-    {
-        StopGame();
-        StartGame();
+        enemiesCntr.DeactiveAllEnemies();
     }
     private void AbortGame()
     {
@@ -109,6 +118,23 @@ public class GameplayController : IInitializable
 
         archiveCntr.UpdateSelectedFileCompression(_completedLevels);
         interfaceCntr.OpenScreen(typeof(ArchiveScreen), true);
+    }
+
+    private void CheckCollision(Unit player, Collision2D collsiion)
+    {
+        if (collsiion.collider.TryGetComponent<Unit>(out _))
+            LostHealth();
+    }
+    private void LostHealth()
+    {
+        if (_currentHealths - 1 != 0)
+        {
+            _currentHealths--;
+            playerCntr.StopPlayer(true);
+            playerCntr.StartPlayer();
+            gameScreen.RemoveHealth();
+        }
+        else EndGame();
     }
 
     private void CheckComplete()

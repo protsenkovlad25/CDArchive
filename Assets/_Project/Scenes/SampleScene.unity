@@ -165,7 +165,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _screens: {fileID: 7479550236811683128}
   _gameView: {fileID: 755852194}
-  _player: {fileID: 832981117}
 --- !u!1 &429107245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,7 +1182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1175421705212365040, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0003242713
+      value: -0.0004576479
       objectReference: {fileID: 0}
     - target: {fileID: 1244706095026601979, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1551,6 +1550,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4176317534474995633, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215064271259464121, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4486421811023817631, guid: 5fa227d380fbf6f429800736a9016d93, type: 3}

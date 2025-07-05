@@ -12,8 +12,11 @@ public class SaveController
 
     public void SavePlayerData(PlayerData playerData)
     {
-        string jsonFile = JsonConvert.SerializeObject(playerData);
-        File.WriteAllText(PLAYER_FILE_PATH, jsonFile);
+        if (Configs.GameSettings.IsSaveData)
+        {
+            string jsonFile = JsonConvert.SerializeObject(playerData);
+            File.WriteAllText(PLAYER_FILE_PATH, jsonFile);
+        }
     }
 
     public PlayerData LoadPlayerData()

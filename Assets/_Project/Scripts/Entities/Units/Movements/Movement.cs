@@ -5,7 +5,6 @@ public abstract class Movement : IMovement
 {
     [SerializeField] protected float _speed;
     [SerializeField] protected bool _isStop;
-    [SerializeField] protected GridSettingsConfig _gridConfig;
 
     protected Rigidbody2D _rb;
     protected Transform _t;

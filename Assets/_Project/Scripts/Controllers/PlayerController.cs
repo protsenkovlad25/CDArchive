@@ -9,10 +9,15 @@ public class PlayerController : IInitializable, IFixedTickable
     private readonly InputController inputCntr;
     private readonly GridSpaceController gridSpaceCntr;
 
+    private bool _isFilling;
+    
     private PlayerData _playerData;
     private List<Cell> _filledCells;
-    private bool _isFilling;
+    
+    private Vector2Int _startPos;
+    private Vector2Int _lastPos;
 
+    public Unit Player => player;
     public PlayerData PlayerData => _playerData;
 
     public PlayerController(Unit player, SaveController saveCntr, InputController inputCntr, GridSpaceController gridSpaceCntr)
@@ -32,8 +37,8 @@ public class PlayerController : IInitializable, IFixedTickable
         _playerData = saveCntr.LoadPlayerData();
         CheckLoadedData();
 
-        player.OnTriggerEnter += TriggerEnter;
-        player.OnTriggerExit += TriggerExit;
+        player.OnCollisionEnter += CollisionEnter;
+        player.OnCollisionExit += CollisionExit;
         player.Init();
         player.StopMove();
     }
@@ -109,19 +114,21 @@ public class PlayerController : IInitializable, IFixedTickable
                 gridSpaceCntr.RemoveSmallAreas(_filledCells);
                 EndFilling();
             }
+
+            _lastPos = cellOnPos.CoordPos;
         }
     }
 
     public void StartPlayer()
     {
-        player.StartMove();
+        player.StartBehavior();
     }
-    public void StopPlayer()
+    public void StopPlayer(bool isRestoreFilling = false)
     {
         if (_isFilling)
-            EndFilling();
+            EndFilling(isRestoreFilling);
 
-        player.StopMove();
+        player.StopBehavior();
     }
 
     private void MoveHandler(Vector2Int direction)
@@ -132,27 +139,31 @@ public class PlayerController : IInitializable, IFixedTickable
     private void StartFilling()
     {
         _isFilling = true;
+
+        _startPos = _lastPos;
     }
-    private void EndFilling()
+    private void EndFilling(bool isRestoreFilling = false)
     {
         _isFilling = false;
 
         player.StopMove();
         player.StartMove();
-        player.transform.position = gridSpaceCntr.GetAlignCellPos(player.transform.position);
+        player.transform.position = isRestoreFilling ? gridSpaceCntr.GetPosByCoordinates(_startPos) :
+                                                       gridSpaceCntr.GetAlignCellPos(player.transform.position);
+
+        if (isRestoreFilling)
+        {
+            foreach (var cell in _filledCells)
+                cell.ChangeState(CellState.Internal);
+        }
 
         _filledCells.Clear();
     }
 
-    private void TriggerEnter(Collider2D collider)
+    private void CollisionEnter(Unit unit, Collision2D collision)
     {
-        //if (collider.TryGetComponent(out Cell cell))
-        //{
-        //    cell.ChangeState(CellState.Filled);
-        //    _filledCells.Add(cell);
-        //}
     }
-    private void TriggerExit(Collider2D collider)
+    private void CollisionExit(Unit unit, Collision2D collision)
     {
     }
 }

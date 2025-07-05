@@ -22,6 +22,7 @@ public class ArchiveController : IInitializable
         archiveScreen.OnOpened += OpenArchive;
         archiveScreen.OnFileClicked += FileCliked;
         archiveScreen.OnWriteClicked += WriteClicked;
+        archiveScreen.OnCompressClicked += CompressClicked;
         archiveScreen.LoadFiles(playerCntr.PlayerData.GameFiles);
         archiveScreen.LoadDisc(playerCntr.PlayerData.DiscData);
 
@@ -47,6 +48,10 @@ public class ArchiveController : IInitializable
         _selectedFile.ChangeActiveState(false);
 
         DeselectFile();
+    }
+    private void CompressClicked()
+    {
+        archiveScreen.UpdateFileSpace(0, false);
     }
 
     private void FileCliked(FileSlot file)

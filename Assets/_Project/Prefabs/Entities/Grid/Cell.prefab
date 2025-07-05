@@ -48,14 +48,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 9096543216426857778}
   _state: 1
-  _layerByState:
+  _dataByState:
     _serializedList:
     - Key: 0
-      Value: CellInternal
+      Value:
+        Layer: CellInternal
+        Color: {r: 0, g: 0, b: 0, a: 1}
     - Key: 1
-      Value: CellExternal
+      Value:
+        Layer: CellExternal
+        Color: {r: 0.37254903, g: 0.8078432, b: 0.7960785, a: 1}
     - Key: 2
-      Value: CellFilled
+      Value:
+        Layer: CellFilled
+        Color: {r: 0.6784314, g: 0.2784314, b: 1, a: 1}
 --- !u!61 &4668424797255367934
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -86,7 +92,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -100,7 +106,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0
 --- !u!1 &4288908785310594862
 GameObject:
