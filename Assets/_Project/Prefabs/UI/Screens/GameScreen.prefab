@@ -280,8 +280,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _background: {fileID: 760615135145831483}
   _lock: {fileID: 1717269146729087235}
-  _openTime: 0
-  _closeTime: 0
+  _openTime: 0.2
+  _closeTime: 0.2
   _topPanel: {fileID: 5778846625823486518}
   _gamePanel: {fileID: 5168513022026648294}
   _gameBottomPanel: {fileID: 3790405582202119740}

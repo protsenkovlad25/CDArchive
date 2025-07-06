@@ -27,6 +27,23 @@ public class ArchiveScreen : Screen
         _filesPanel.Init();
     }
 
+    public override void Open(UnityAction onEndAction = null)
+    {
+        base.Open(onEndAction);
+
+        _topPanel.Open();
+        _discPanel.Open();
+        _filesPanel.Open();
+    }
+    public override void Close(UnityAction onEndAction = null)
+    {
+        base.Close(onEndAction);
+
+        _topPanel.Close();
+        _discPanel.Close();
+        _filesPanel.Close();
+    }
+
     public void LoadFiles(List<GameFileData> files)
     {
         _filesPanel.LoadFiles(files);

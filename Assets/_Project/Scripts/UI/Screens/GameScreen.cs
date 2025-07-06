@@ -21,6 +21,23 @@ public class GameScreen : Screen
         _gameBottomPanel.Init();
     }
 
+    public override void Open(UnityAction onEndAction = null)
+    {
+        base.Open(onEndAction);
+
+        _topPanel.Open(onEndAction);
+        _gamePanel.Open(onEndAction);
+        _gameBottomPanel.Open(onEndAction);
+    }
+    public override void Close(UnityAction onEndAction = null)
+    {
+        base.Close(onEndAction);
+
+        _topPanel.Close(onEndAction);
+        _gamePanel.Close(onEndAction);
+        _gameBottomPanel.Close(onEndAction);
+    }
+
     public void UpdateProgress(float value)
     {
         _gameBottomPanel.UpdateProgress(value);

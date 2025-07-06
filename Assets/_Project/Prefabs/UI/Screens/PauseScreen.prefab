@@ -474,8 +474,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _background: {fileID: 1539984178203015274}
   _lock: {fileID: 578104714690991442}
-  _openTime: 0
-  _closeTime: 0
+  _openTime: 0.2
+  _closeTime: 0.2
   _buttonsContainer: {fileID: 8462322931235079162}
 --- !u!114 &578104714690991442 stripped
 MonoBehaviour:

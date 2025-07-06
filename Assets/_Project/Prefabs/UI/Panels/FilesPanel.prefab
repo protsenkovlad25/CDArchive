@@ -176,9 +176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b4d8e7024b11e46b2eb2ea1777b3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _direction: 0
-  _openTime: 0
-  _closeTime: 0
+  _direction: 3
+  _openTime: 0.2
+  _closeTime: 0.2
   _fileSlotPrefab: {fileID: 1643039598263725548, guid: 91d01ebd8d6696f41a8bbfce4dae200e, type: 3}
   _fileSlotsContainer: {fileID: 8947395578830681886}
   _compressButton: {fileID: 5596808165733247413}

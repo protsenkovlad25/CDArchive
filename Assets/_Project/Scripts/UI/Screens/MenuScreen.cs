@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -21,6 +22,42 @@ public class MenuScreen : Screen
 
         _buttons = new();
         _buttons.AddRange(_buttonsContainer.GetComponentsInChildren<Button>());
+
+        _topText.transform.localScale = Vector3.zero;
+        _buttonsContainer.transform.localScale = Vector3.zero;
+    }
+
+    protected override void OpenAnim(UnityAction onEndAction = null)
+    {
+        gameObject.SetActive(true);
+        _closeSeq?.Kill();
+
+        _openSeq = DOTween.Sequence();
+        _openSeq.SetUpdate(true);
+        _openSeq.Append(_background.DOFade(_startAlpha, _openTime));
+        _openSeq.Join(_buttonsContainer.DOScale(1, _openTime));
+        _openSeq.Join(_topText.transform.DOScale(1, _openTime));
+        _openSeq.AppendCallback(() =>
+        {
+            onEndAction?.Invoke();
+            OnOpen();
+        });
+    }
+    protected override void CloseAnim(UnityAction onEndAction = null)
+    {
+        _openSeq?.Kill();
+
+        _closeSeq = DOTween.Sequence();
+        _closeSeq.SetUpdate(true);
+        _closeSeq.Append(_background.DOFade(0, _closeTime));
+        _closeSeq.Join(_buttonsContainer.DOScale(0, _closeTime));
+        _closeSeq.Join(_topText.transform.DOScale(0, _closeTime));
+        _closeSeq.AppendCallback(() =>
+        {
+            gameObject.SetActive(false);
+            onEndAction?.Invoke();
+            OnClose();
+        });
     }
 
     public void ClickArchive()

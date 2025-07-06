@@ -10,9 +10,9 @@ public abstract class Screen : MonoBehaviour
 
     #region Serialize Fields
     [Header("Base UI")]
-    [SerializeField] private Image _background;
-    [SerializeField] private Image _lock;
-    [Header("Base Anim Values")]
+    [SerializeField] protected Image _background;
+    [SerializeField] protected Image _lock;
+    [Header("Base Anim Times")]
     [SerializeField] protected float _openTime;
     [SerializeField] protected float _closeTime;
     #endregion
@@ -31,6 +31,7 @@ public abstract class Screen : MonoBehaviour
         _rectTransform = GetComponent<RectTransform>();
 
         _startAlpha = _background.color.a;
+        _background.DOFade(0, 0);
     }
 
     #region OpenClose
@@ -42,22 +43,44 @@ public abstract class Screen : MonoBehaviour
     {
         CloseAnim(onEndAction);
     }
+    protected virtual void OnOpen()
+    {
+        OnOpened?.Invoke();
+    }
+    protected virtual void OnClose()
+    {
+        OnClosed?.Invoke();
+    }
     #endregion
 
     #region Animations
     protected virtual void OpenAnim(UnityAction onEndAction = null)
     {
         gameObject.SetActive(true);
+        _closeSeq?.Kill();
 
-        onEndAction?.Invoke();
-        OnOpened?.Invoke();
+        _openSeq = DOTween.Sequence();
+        _openSeq.SetUpdate(true);
+        _openSeq.Append(_background.DOFade(_startAlpha, _openTime));
+        _openSeq.AppendCallback(() =>
+        {
+            onEndAction?.Invoke();
+            OnOpen();
+        });
     }
     protected virtual void CloseAnim(UnityAction onEndAction = null)
     {
-        gameObject.SetActive(false);
+        _openSeq?.Kill();
 
-        onEndAction?.Invoke();
-        OnClosed?.Invoke();
+        _closeSeq = DOTween.Sequence();
+        _closeSeq.SetUpdate(true);
+        _closeSeq.Append(_background.DOFade(0, _closeTime));
+        _closeSeq.AppendCallback(() =>
+        {
+            gameObject.SetActive(false);
+            onEndAction?.Invoke();
+            OnClose();
+        });
     }
     #endregion
 

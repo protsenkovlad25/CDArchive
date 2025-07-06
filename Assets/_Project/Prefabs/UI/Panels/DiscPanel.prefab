@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _direction: 0
-  _openTime: 0
-  _closeTime: 0
+  _openTime: 0.2
+  _closeTime: 0.2
   _disc: {fileID: 627162142298904614}
   _filledText: {fileID: 8273849912342811780}
   _writeButton: {fileID: 7656235857976309774}
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.81960785, g: 0.8959284, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -284,6 +284,14 @@ PrefabInstance:
     - target: {fileID: 5031545152195923397, guid: 06f06c5522d4d4245bdb62cbb0d40ada, type: 3}
       propertyPath: m_Name
       value: Disc
+      objectReference: {fileID: 0}
+    - target: {fileID: 7664716266034612479, guid: 06f06c5522d4d4245bdb62cbb0d40ada, type: 3}
+      propertyPath: m_fontSize
+      value: 30.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686505324939406220, guid: 06f06c5522d4d4245bdb62cbb0d40ada, type: 3}
+      propertyPath: m_fontSize
+      value: 33.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

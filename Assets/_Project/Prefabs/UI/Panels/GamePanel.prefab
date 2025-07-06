@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _direction: 0
-  _openTime: 0
-  _closeTime: 0
+  _openTime: 0.2
+  _closeTime: 0.2
 --- !u!1001 &8334856595885280197
 PrefabInstance:
   m_ObjectHideFlags: 0

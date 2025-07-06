@@ -5,9 +5,8 @@ using Zenject;
 public class InterfaceController : IInitializable
 {
     private readonly ScreensView screensView;
-
     private Dictionary<Type, Screen> _screenByType;
-    private List<Screen> _screens => screensView.Screens;
+
     public ScreensView Screens => screensView;
 
     public InterfaceController(ScreensView screensView)
@@ -19,7 +18,7 @@ public class InterfaceController : IInitializable
     public void Initialize()
     {
         _screenByType = new();
-        foreach (var screen in _screens)
+        foreach (var screen in screensView.Screens)
         {
             screen.Init();
             _screenByType.Add(screen.GetType(), screen);

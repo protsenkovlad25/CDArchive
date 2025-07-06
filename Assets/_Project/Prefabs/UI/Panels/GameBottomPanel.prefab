@@ -51,9 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0796cbc811771b5408508fe8623f30c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _direction: 0
-  _openTime: 0
-  _closeTime: 0
+  _direction: 2
+  _openTime: 0.2
+  _closeTime: 0.2
   _healthPanel: {fileID: 474649269800630655}
   _progressPanel: {fileID: 6651835053846665450}
 --- !u!1001 &366277377068443452

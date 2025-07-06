@@ -231,8 +231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _background: {fileID: 7586349204275268750}
   _lock: {fileID: 8364002783204254134}
-  _openTime: 0
-  _closeTime: 0
+  _openTime: 0.2
+  _closeTime: 0.2
   _topPanel: {fileID: 3834341202194449807}
   _discPanel: {fileID: 1945695000483920384}
   _filesPanel: {fileID: 8674956070676540817}
