@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using VP;
@@ -60,7 +62,8 @@ public class GridSpace : MonoBehaviour
     [ContextMenu("Draw Space")]
     public void DrawSpace()
     {
-        ClearSpace();
+        _startInternalCells = 0;
+        _currentInternalCells = 0;
 
         int width = _data.ExternalSize.x;
         int height = _data.ExternalSize.y;
@@ -70,6 +73,7 @@ public class GridSpace : MonoBehaviour
         Cell cell;
         Vector2Int gridPos;
         GameObject parent;
+        Dictionary<Vector2Int, Cell> newCellByPos = new();
         for (int x = 0; x < width; x++)
         {
             if (_parents.Count < width)
@@ -85,12 +89,12 @@ public class GridSpace : MonoBehaviour
             {
                 gridPos = new(x, y);
 
-                cell = _poolCells.Take();
+                cell = _cellsByPos.ContainsKey(gridPos) ? _cellsByPos[gridPos] : _poolCells.Take();
                 cell.transform.parent = parent.transform;
                 cell.name = $"Cell_C{x}_R{y}";
                 cell.Reuse();
                 cell.SetCoordPos(gridPos);
-                
+
                 if (x >= internalLB.x && x <= internalRT.x &&
                     y >= internalLB.y && y <= internalRT.y)
                 {
@@ -98,9 +102,17 @@ public class GridSpace : MonoBehaviour
                     _currentInternalCells++;
                     cell.ChangeState(CellState.Internal);
                 }
-                _cellsByPos[gridPos] = cell;
+                else cell.ChangeState(CellState.External);
+
+                newCellByPos[gridPos] = cell;
             }
         }
+
+        int excessCount = _cellsByPos.Count - newCellByPos.Count > 0 ? _cellsByPos.Count - newCellByPos.Count : 0;
+        for (int i = _cellsByPos.Count - 1; i >= _cellsByPos.Count - excessCount; i--)
+            ClearCell(_cellsByPos.ElementAt(i).Value);
+
+        _cellsByPos = newCellByPos;
 
         UpdateCellPositions();
         _borders.UpdateBorders(_data.ExternalSize, _config.Spacing, _config.Offset);
@@ -111,9 +123,13 @@ public class GridSpace : MonoBehaviour
     {
         _startInternalCells = 0;
         _currentInternalCells = 0;
-
+        
         _poolCells.ReturnAll();
         _cellsByPos.Clear();
+    }
+    private void ClearCell(Cell cell)
+    {
+        _poolCells.Return(cell);
     }
 
     public Vector2 GetPosByCoordinates(Vector2Int coord)

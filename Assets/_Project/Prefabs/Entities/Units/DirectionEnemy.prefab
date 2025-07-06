@@ -78,7 +78,7 @@ TrailRenderer:
   m_SortingLayerID: 2077667457
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Time: 0.3
+  m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -288,7 +288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8044926555527879194, guid: 2f815a8e5c41721478d2fcad9fa5d486, type: 3}
       propertyPath: managedReferences[425335187892338766]._speed
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8044926555527879194, guid: 2f815a8e5c41721478d2fcad9fa5d486, type: 3}
       propertyPath: managedReferences[425335187892338761]._isStop
